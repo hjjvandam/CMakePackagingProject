@@ -7,5 +7,6 @@ User Documentation
    :maxdepth: 2
 
    assumptions
-   definitions
    targets
+   dependencies
+   definitions

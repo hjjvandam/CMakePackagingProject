@@ -4,8 +4,29 @@ cpp_toolchain Module
 ====================
 
 The ``cpp_toolchain`` module contains functions related to writing and
-manipulating the toolchain file
+manipulating the toolchain file.
 
+.. __cpp_get_toolchain_vars-label:
+
+_cpp_get_toolchain_vars
+-----------------------
+
+.. function:: _cpp_get_toolchain_vars(<return>)
+
+   Ultimately we will be concerned with a long list of variables that get
+   written to the toolchain file.  In order to avoid having this list in
+   numerous places (and therefore increasing the likely hood of someone
+   forgetting to update one of those places) we have created this function.
+   Basically you give it an identifier it gives you the list of variables we
+   look for.
+
+   :param return: An identifier to assign the list to.
+
+
+.. __cpp_write_toolchain_file-label:
+
+_cpp_write_toolchain_file
+-------------------------
 
 .. function:: _cpp_write_toolchain_file([DESTINATION <destination>])
 

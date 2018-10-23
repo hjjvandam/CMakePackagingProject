@@ -57,11 +57,8 @@ three categories:
 * Other
     Miscellaneous features I may categorize at a later point
 
-.. todo::
-   Link features to the respective documentation
-
 Dependency Support
-++++++++++++++++++
+^^^^^^^^^^^^^^^^^^
 
 * Dependencies with source explicitly included in the project (v1.0.0)
 * Dependencies hosted on public and private GitHub-based repositories (v1.0.0)
@@ -70,13 +67,13 @@ Dependency Support
 * Dependencies can be versioned by commit, branch, or version (v1.0.0)
 
 Project Support
-+++++++++++++++
+^^^^^^^^^^^^^^^
 
 * shared and static libraries (v1.0.0)
 * executables (v1.0.0)
 * multiple project components (v1.0.0)
 
 Other
-+++++
+^^^^^
 
 * Unit testing framework fo CMake functions (v1.0.0)

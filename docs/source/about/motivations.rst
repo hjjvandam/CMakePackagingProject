@@ -24,7 +24,7 @@ know about every possible package is unrealistic.  Furthermore asking the user
 to build your project's dependencies decreases the user-friendliness (and thus
 the adoption) of your project.  This is why we have chosen to include it.
 
-Anyways of the above list, steps 1 and 2 are the hardest.  This is because
+Anyways, of the above list, steps 1 and 2 are the hardest.  This is because
 CMake's ``find_package`` and ``ExternalProject_Add`` commands are designed to be
 quite general.  If the dependency you are trying to include implements an ideal
 CMake-based build system, then these two functions will work without too much
@@ -41,9 +41,9 @@ build a dependency manager that works with ideally packaged projects, so that
 build systems for new projects can be written quickly and confidently.  Of
 course this still requires that that we somehow make existing, non-ideally
 packaged dependencies appear as if they were ideally packaged.  Ultimately,
-there's way around doing this on a per-package basis.  However, assuming a
+there's no way around doing this on a per-package basis.  However, assuming a
 community agreed upon standard for what constitutes "ideal" this only needs to
-be done once in order for the entire community to benefit.
+be done once per non-ideal package in order for the entire community to benefit.
 
 Additional Considerations
 -------------------------

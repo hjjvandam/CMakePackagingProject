@@ -6,6 +6,8 @@
 Welcome to CMakePackagingProject's documentation!
 #################################################
 
+Disclaimer this documentation is a work in process.
+
 Contents
 ========
 

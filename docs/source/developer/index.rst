@@ -13,6 +13,7 @@ Contents
    :maxdepth: 2
 
    conventions
+   dependencies
    unit_testing
    unit_test_helpers
    additional_resources
