@@ -6,7 +6,7 @@ cpp_toolchain Module
 The ``cpp_toolchain`` module contains functions related to writing and
 manipulating the toolchain file.
 
-.. __cpp_get_toolchain_vars-label:
+.. _cpp_get_toolchain_vars-label:
 
 _cpp_get_toolchain_vars
 -----------------------
@@ -23,7 +23,7 @@ _cpp_get_toolchain_vars
    :param return: An identifier to assign the list to.
 
 
-.. __cpp_write_toolchain_file-label:
+.. _cpp_write_toolchain_file-label:
 
 _cpp_write_toolchain_file
 -------------------------

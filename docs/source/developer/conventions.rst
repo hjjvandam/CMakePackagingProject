@@ -34,12 +34,12 @@ Functions
   * Do not have to remember order of arguments.
   * Avoids the need for placeholder values.
 * To the extent possible avoid using variables that are not part of the
-functions signature
+  functions signature
 
   * This makes the function's use more transparent and avoids the user needing
-  to manipulate CMake variables to control your function.
+    to manipulate CMake variables to control your function.
   * An easy way to still use CMake variables for default values is:
-  ``cpp_option(VARIABLE_USED_IN_FUNCTION CMAKE_VARIABLE_PROVIDING_DEFAULT)``
+    ``cpp_option(VARIABLE_USED_IN_FUNCTION CMAKE_VARIABLE_PROVIDING_DEFAULT)``
     
 
 If Statements

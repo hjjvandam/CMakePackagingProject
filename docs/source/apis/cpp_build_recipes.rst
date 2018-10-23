@@ -24,7 +24,7 @@ users writing their own build recipes for CPP.
    * CMAKE_INSTALL_PREFIX
 
 .. function:: cpp_github_cmake(<name> <url> [TOKEN <token>] [BRANCH <branch>]\
-[CMAKE_ARGS <arg1> [, <arg2> [, ...]]])
+                               [CMAKE_ARGS <arg1> [, <arg2> [, ...]]])
 
    Wraps the boilerplate for adding a dependency from GitHub.
 
@@ -32,13 +32,13 @@ users writing their own build recipes for CPP.
        dependency as it would be passed to ``find_package``.
 
    :param url: The URL to the GitHub repository.  It should be of the form
-       `github.com/organization/repo`. Optionally you may include the `www.` or
-        the `https://`, but they are not necessary.
+     ``github.com/organization/repo``. Optionally you may include the ``www.``
+     or the ``https://``, but they are not necessary.
 
    :param token: This allows you to provide a GitHub token to CPP so that CPP
-       can access a private repo.  The usual caveats apply to using GitHub
-       tokens.  Of note: including a hard coded token in a file that is
-       publicly hosted on GitHub will result in GitHub revoking the token.
+     can access a private repo.  The usual caveats apply to using GitHub
+     tokens.  Of note: including a hard coded token in a file that is
+     publicly hosted on GitHub will result in GitHub revoking the token.
 
    :param branch: The name of the branch to use.  If one is not provided the
        master branch is assumed.
@@ -49,7 +49,7 @@ users writing their own build recipes for CPP.
    CMake variables used:
 
    * CMAKE_BINARY_DIR
-   Used for staging the dependency
+       Used for staging the dependency
    * CMAKE_TOOLCHAIN_FILE
    * CMAKE_INSTALL_PREFIX
 

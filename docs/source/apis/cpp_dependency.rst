@@ -29,7 +29,7 @@ cpp_find_dependency
    sensible manner.
 
    :param found: An identifier for the return value, which indicates whether
-   the dependency was found or not.
+     the dependency was found or not.
 
    :param name: The name of the dependency to locate.
 
@@ -68,7 +68,7 @@ cpp_find_or_build_dependency
 
    * CMAKE_BINARY_DIR - For storing build recipes we generate on the fly.
 
-.. __cpp_build_dependency-label:
+.. _cpp_build_dependency-label:
 
 _cpp_build_dependency
 ---------------------
@@ -85,9 +85,9 @@ _cpp_build_dependency
    CMake variables used:
 
         * CMAKE_BINARY_DIR
-     Used to make the default directory for the sub-build
+            Used to make the default directory for the sub-build
 
-.. __cpp_depend_install_path-label:
+.. _cpp_depend_install_path-label:
 
 _cpp_depend_install_path
 ------------------------
@@ -105,13 +105,13 @@ _cpp_depend_install_path
    :param name: The name of the dependency.
 
    :param cache: The path to the CPP cache where we will install the dependency.
-   Defaults to the value of the ``${CPP_INSTALL_CACHE}``.
+     Defaults to the value of the ``${CPP_INSTALL_CACHE}``.
 
    :param pname: The name of the project we are building the dependency for.
-   Defaults to the value of ``${PROJECT_NAME}``.
+     Defaults to the value of ``${PROJECT_NAME}``.
 
    :param file: The path to the toolchain file.  Defaults to the value of
-   ``${CMAKE_TOOLCHAIN_FILE}``.
+     ``${CMAKE_TOOLCHAIN_FILE}``.
 
 
    CMake variables used:
@@ -119,4 +119,3 @@ _cpp_depend_install_path
    * CPP_INSTALL_CACHE
    * CMAKE_TOOLCHAIN_FILE
    * PROJECT_NAME
-

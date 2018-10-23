@@ -9,10 +9,6 @@ as no surprise that we want to unit test CPP. Unfortunately, there isn't a whole
 lot of support for testing scripts/functions written in the CMake language. This
 is why we have dedicated an entire page to our unit testing practices.
 
-.. todo::
-
-   Finish/integrate me
-
 Unit Testing Strategy
 ---------------------
 

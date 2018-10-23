@@ -7,7 +7,7 @@ The ``cpp_cmake_helpers`` module is designed to facilitate running the ``cmake``
 command in a nested capacity.
 
 
-.. __cpp_write_top_list-label:
+.. _cpp_write_top_list-label:
 
 _cpp_write_top_list
 -------------------
@@ -37,7 +37,7 @@ _cpp_write_top_list
      * Used to populate the minimum version
      * Lists are intended for use with the same ``cmake`` executable only
 
-.. __cpp_run_cmake_command-label:
+.. _cpp_run_cmake_command-label:
 
 _cpp_run_cmake_command
 ----------------------
@@ -85,7 +85,7 @@ _cpp_run_cmake_command
   * CMAKE_COMMAND
         To call the ``cmake`` executable.
 
-.. __cpp_run_sub_build-label:
+.. _cpp_run_sub_build-label:
 
 _cpp_run_sub_build
 ------------------
