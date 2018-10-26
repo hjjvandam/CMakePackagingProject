@@ -33,6 +33,7 @@ Functions
   * Easier to read as labels describe what the variable is used for.
   * Do not have to remember order of arguments.
   * Avoids the need for placeholder values.
+
 * To the extent possible avoid using variables that are not part of the
   functions signature
 
@@ -65,3 +66,69 @@ gotchas as possible.
 
   * These functions return a value that can be used in an if statement
     without gotchas.
+
+CMake Parse Arguments
+---------------------
+
+As mentioned above this works similar to Python's kwargs, and since CMake
+apparently doesn't have a word for this concept I'm just going to call them
+kwargs.  Here's some tips/conventions for using kwargs in CMake:
+
+* There's three types of kwargs: toggles, one value, multiple value.
+
+  * Toggles take zero values and are either present (ON) or not present (OFF)
+  * One value kwargs take a single value
+  * Multiple value kwargs take one or more values.
+
+* By convention recognized keywords are stored in variables.  One for each
+  type of kwarg.  The names of these variables are also given by convention
+  (``<prefix>`` is the function's variableprefix):
+
+  * toggles are listed in ``<prefix>_T_kwargs``,
+  * one value kwargs are listed in ``<prefix>_O_kwargs``, and
+  * multiple value kwargs are listed in ``<prefix>_M_kwargs``
+
+* Check required kwargs with :ref:`cpp_assert_true-label`.
+* Avoid crashing if an unrecognized keyword is present
+
+  * Useful for compatibility with other CPP versions with different keywords
+  * Facilitates forwarding kwargs to subfunctions when subfunction takes
+    different keywords.
+
+* Be careful forwarding kwargs to functions that have keywords taking multiple
+  values.  Unrecognized keywords can be taken as additional values for the
+  multiple value keyword.
+
+
+Kwargs work best if functions accepting them use the same keywords for the same
+concepts.  In particular, this convention avoids intermediate functions
+from having to this case you can pass
+all the
+arguments to the
+next function simply by passing
+``${ARGN}``.  To that end we have established the following conventions for
+naming keywords.  I've tried to keep them consistent with CMake's corresponding
+variables.
+
+* TOOLCHAIN
+   Used to store the path to the toolchain that a function should use.
+* CPP_CACHE
+   Used to store the path to the current CPP Cache.
+* SOURCE_DIR
+   Used to store the path to the root of a file hierarchy.
+* INSTALL_DIR
+   Used to store the path where something should be installed.
+* CMAKE_ARGS
+   Used to store additional variables that should be set when calling a sub
+   CMake command.
+* BINARY_DIR
+   Used to store the path to a directory for holding build files.
+* VERSION
+   Stores the version of a target
+* COMPONENTS
+   Stores a list of subtargets.
+* NAME
+   Stores the name of a dependency (often different than the actual target name)
+* TARGETS
+   Stores a list of targets (typically different than the package name)
+

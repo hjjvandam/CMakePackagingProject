@@ -52,8 +52,8 @@ the source code is can be done like:
 what constitutes a suitable dependency for your project.  These include
 things such as the version of the dependency (``VERSION <version>``) and the
 components you explicitly need (``COMPONENTS <comp1> <comp2> ...``) (well I
-plan to let you anyways).  Consult :ref:`cpp_find_or_build_dependency` for an
-up-to-date list of these knobs.
+plan to let you anyways).  Consult :ref:`cpp_find_or_build_dependency-label`
+for an up-to-date list of these knobs.
 
 Adding Dependencies Hosted on GitHub
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -94,7 +94,7 @@ not the API.  Otherwise you specify your project's dependency on the API via
 where ``<name>`` would be something like ``blas`` and the various ``<impl>``
 would be acceptable implementations in the order of precedence.  The
 ``cpp_find_or_build_dependency`` variant also takes information for building one
- particular implementation, *e.g.*,
+particular implementation, *e.g.*,
 
 .. code-block::cmake
 

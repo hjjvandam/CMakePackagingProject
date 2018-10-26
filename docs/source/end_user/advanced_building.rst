@@ -18,7 +18,7 @@ options for CMake these files can come in handy.  Basically they look like:
 
    set(OPTION1 VALUE1)
    set(OPTION2 VALUE2)
-   ...
+
 
 That is they're just a large number of CMake ``set`` commands.  Internally CPP
 uses a toolchain file to forward options to dependencies.  This file is located

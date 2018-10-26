@@ -31,23 +31,40 @@ _cpp_write_toolchain_file
 .. function:: _cpp_write_toolchain_file([DESTINATION <destination>])
 
     This function will create a file *toolchain.cmake* that is suitable for use
-    as a CMake toolchain file.  The contents of the file are populated by
-    reading standard CMake variables.
+    as a CMake toolchain file.  ``_cpp_get_toolchain_var`` will be called to get
+    the list of variables and the values of those variables will be used in the
+    toolchain file.
 
     :param destination: The full path to the directory where the toolchain file
         should be installed.  Defaults to ``CMAKE_BINARY_DIR``
 
-    CMake variables used:
+    :CMake Variables Used:
 
-    * CMAKE_BINARY_DIR (Only used if destination is not specified)
-    * CMAKE_C_COMPILER
-    * CMAKE_CXX_COMPILER
-    * CMAKE_Fortran_COMPILER
-    * CMAKE_SYSTEM_NAME
-    * CMAKE_MODULE_PATH
-    * BUILD_SHARED_LIBS
-    * CMAKE_SHARED_LIBRARY_PREFIX
-    * CMAKE_SHARED_LIBRARY_SUFFIX
-    * CMAKE_STATIC_LIBRARY_PREFIX
-    * CMAKE_STATIC_LIBRARY_SUFFIX
-    * CPP_LOCAL_CACHE
+      All variables returned by ``_cpp_get_toolchain_var`` as well as:
+
+      * CMAKE_BINARY_DIR
+        Used to default the location of the resulting toolchain file.
+
+.. _cpp_change_toolchain-label:
+
+_cpp_change_toolchain
+---------------------
+
+.. function:: _cpp_change_toolchain([TOOLCHAIN <path>] \
+                                    [VARIABLES <var1> <value1> \
+                                              [<var2> <value2> [...]])
+
+   This function wraps the modification of an already existing toolchain file.
+   Note that the input to this function's ``VARIABLES`` keyword needs to be
+   pairs where the first member of the pair is the identifier to change the
+   value of and the second member is the value to change it to.
+
+   :param path: The path to the toolchain file.  Defaults to the value of
+     ``CMAKE_TOOLCHAIN_FILE``.
+   :param var: The identifier of the variable to modify.
+   :param value: The value to set the identifier to in the toolchain file.
+
+   :CMake Variables Used:
+
+     * CMAKE_TOOLCHAIN_FILE
+       Used as the default for the toolchain file.
