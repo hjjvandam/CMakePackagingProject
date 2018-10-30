@@ -30,14 +30,32 @@ the **public** header files associated with the resulting library, and the
 targets the library depends on.  Note that calling this command does not
 automatically register the library for installation.
 
-There's a lot more options for the ``cpp_add_library`` function and full API
-details can be found at :ref:`cpp_add_library-label`.
+Full API details can be found at :ref:`cpp_add_library-label`.
+
+Executables
+-----------
+
+Executables are registered with CPP analogous to libraries:
+
+.. code-block:: cmake
+
+   cpp_add_executable(
+      my_executable
+      SOURCES source1.cpp source2.cpp ...
+      DEPENDS depend1 depend2 depend3 ...
+   )
+
+From the user's perspective, aside from the different function name, the only
+difference is that executables never have public header files.
+
+Full API details can be found at :ref:`cpp_add_executable`.
+
 
 Packaging Targets
 -----------------
 
 After you have registered all your targets with CPP you need to pick which ones
-you want to install.  This is done with the `cpp_install`` command.  Usage is:
+you want to install.  This is done with the ``cpp_install`` command.  Usage is:
 
 .. code-block:: cmake
 

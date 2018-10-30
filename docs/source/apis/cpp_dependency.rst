@@ -51,8 +51,7 @@ cpp_find_or_build_dependency
 .. function:: cpp_find_or_build_dependency(\
                   <name> (RECIPE <recipe> || \
                           PATH <path>     || \
-                          URL <url> [PRIVATE] [BRANCH <branch>]\
-                          VIRTUAL <imp1> [<imp2> ...])
+                          URL <url> [PRIVATE] [BRANCH <branch>])
 
    This function attempts to make it easy for a user of CPP to add a dependency
    that can optionally be built by CPP if it is not found.  It requires two
@@ -84,51 +83,16 @@ _cpp_record_find
 ----------------
 
 .. function:: _cpp_record_find(NAME <name> \
-                               [VERSION <version>] \
-                               [COMPONENTS <comp1> [<comp2> [...]]] \
-                               [CMAKE_ARGS <var1>=<val1> [<var2>=<val2> [...]]])
+                               [VERSION <version>])
 
    This function records the ``cpp_find_dependency`` call to a target
    ``_cpp_<name>_interface`` via that target's ``VERSION`` property so that it
-   can be repeated in the ``<name>-config.cmake`` file.
+   can be repeated in the ``<name>-config.cmake`` file.  Note that
+   ``find_dependency`` takes additional arguments that are not concerned with
+   the specification of what constitutes a suitable variant of a dependency.
 
-
-.. _cpp_configure_build-label:
-
-_cpp_configure_build
---------------------
-
-.. function:: _cpp_build_dependency(<install_path> <source_path>
-                                    NAME <name> \
-                                    [URL <url> ] \
-                                    [SOURCE_DIR <dir> ] \
-                                    [INSTALL_DIR <install>])
-
-   This function basically sets us up with source code so that we can build if
-   necessary.  If we can't build it sets the pat
-
-   :param name: The name of the dependency to build.
-   :param url: The URL where the dependency can be obtained from.
-   :param dir: The local directory containing the source code.
-   :param install: Where the dependency should be installed.  Defaults to the
-        CPP Cache.
-
-.. _cpp_get_remote_dependency-label:
-
-_cpp_get_remote_dependency
---------------------------
-
-.. function:: _cpp_get_remote_dependency(URL <url> DOWNLOAD_DIR <dir>)
-
-   This function retrieves an asset from the internet and places it in the
-   specified directory.
-
-   There's two main assumptions to this function.  First we assume the URL
-   leads us to a tarball.  Next we assume that the tarball untars to a single
-   directory.  Checks are in place for violations of these assumptions.
-
-   :param url: The URL from which to retrieve the dependency.
-   :param dir: The directory where the dependency's source should be placed.
+   :param name: The name of the dependency.
+   :param version: The required version of the dependency.
 
 .. _cpp_get_gh_url-label:
 
@@ -136,14 +100,14 @@ _cpp_get_gh_url
 ---------------
 
 .. function:: _cpp_get_gh_url(<return> URL <url> \
-                                       [BRANCH <branch>] \
-                                       [TOKEN <token>])
+                              [BRANCH <branch>] \
+                              [PRIVATE])
 
    This function encapsulates the logic for GitHub's HTML-based API.  The input
    is the base URL of the form ``github.com/<organization>/<repo>`` and the
    output will be the URL to use to download a tarball of the source.  The user
    may optionally include the ``https:`` and/or the ``www.`` and this function
-   will still work.  The GitHub HTML-based API works like:
+   will still work.  FWIW, the GitHub HTML-based API works like:
 
    .. code-block:: html
 
@@ -151,16 +115,68 @@ _cpp_get_gh_url
 
    where ``<organization>`` is the user or organization on GitHub, ``<repo>`` is
    the name of the repo, and ``<branch>`` is either a named branch or a commit.
-   To pass a token through the API one appends ``?access_token=<token>`` to the
-   end of that URL.
+   If ``PRIVATE`` is specified, then this function will use the GitHub token
+   present in ``CPP_GITHUB_TOKEN`` to clone the repo.
+
+   This function will crash if a URL is not specified or if that URL does not
+   contain the literal string ``github.com``.  It also will crash if ``PRIVATE``
+   is specified, but ``CPP_GITHUB_TOKEN`` is not set.
 
    :param return: The identifier to save the resulting URL to.
-   :param url: The URL the user provided that will be parsed.  Assumed to
-     contain ``github.com/`` in it as well as an organization/user and a repo.
+   :param url: The URL the user provided that will be parsed.
    :param branch: The name of the branch to retrieve.  Defaults to master.
-   :param token: The Github token to use for accessing GitHub.  This is needed
-                 for private repositories.
 
+   :CMake Variables:
+
+      * **CPP_GITHUB_TOKEN** - Used to provide a GitHub token to access the
+        private repository.  The token is only used for private repos.
+
+
+.. _cpp_get_source_tarball-label:
+
+_cpp_get_source_tarball
+-----------------------
+
+.. function:: _cpp_get_source_tarball(<output_file>
+                                      (URL <url> [BRANCH <branch>] [PRIVATE] ||\
+                                       SOURCE_DIR <dir>))
+
+   This function encapsulates the process of getting an archive containing the
+   source code, regardless of that source's origin.  In particular we allow for
+   two points of origin: a local directory or a URL.  It is assumed that the
+   URL directly downloads a tarball.
+
+   :param output_file: The path to where the tarball should reside (including
+      the name of the tarball).
+   :param url: The url to download the file from.
+   :param branch: The branch to use (if url is GitHub)
+   :param dir: The directory containing the source.
+
+   :CMake Variables:
+
+       * **CPP_GITHUB_TOKEN** - If a URL to a private GitHub repository is
+         provided the token in this variable will be used to obtain the source.
+
+.. _cpp_get_remote_dependency-label:
+
+.. _cpp_untar_directory-label:
+
+_cpp_untar_directory
+--------------------
+
+.. function:: _cpp_untar_directory(<tar_file> <destination>)
+
+   Given a tarball, this function will untar it and rename the resulting
+   directory.  This function will err if the tarball:
+
+   * does not exist,
+   * is empty,
+   * contains 1 object and  that object is not a directory, or
+   * contains more than 1 objects.
+
+
+   :param tar_file: The path to the tarball.
+   :param destination: What the directory should be renamed to.
 
 .. _cpp_build_local_dependency-label:
 

@@ -10,25 +10,37 @@ that dependency provides CMake packaging files or if a find recipe is
 available.  As the C/C++ community writes better CMake-based build systems
 (or better yet adopts CPP) we anticipate the need for writing find recipes to
 drop considerably.  As for building a dependency we've striven to do it with
-the absolute fewest amount of input possible; again, only by the community
+the absolute minimal amount of input possible; again, only by the community
 writing better build systems will this remain as simple as possible.
 
 Adding the Dependency
 ---------------------
 
 There are two commands to add a dependency to your project
-``cpp_find_dependency`` and ``cpp_find_or_build_dependency``.  The former is
-simpler to use:
+``cpp_find_dependency`` and ``cpp_find_or_build_dependency``.  As you might
+guess, the former will only look for the dependency whereas the latter will
+build the dependency if it can't find it.  Since ``cpp_find_dependency`` does
+not have to worry about building the dependency it is simpler to use:
 
 .. code-block:: cmake
 
-   cpp_find_dependency(<name>)
+   cpp_find_dependency(NAME <name>)
 
 This will look for the dependency with the provided name (CMake is unfortunately
 case-sensitive so you'll have to get the case right; the community consensus is
-that the name should be snake_case for whatever that's worth) if found the
+that the name should be "snake_case" for whatever that's worth) if found the
 components from that package will be available for use as dependencies for your
-targets.  If it's not found configuration will abort.
+targets. Following the conventions laid out by CMake's ``find_package``,
+``cpp_find_dependency`` assumes the dependency is optional.  If the dependency
+is required the correct syntax is:
+
+.. code-block:: cmake
+
+   cpp_find_dependency(NAME <name> REQUIRED)
+
+In this case an error will be raised if the dependency can not be found.
+
+``cpp_find_dependency`` should be used when the
 
 ``cpp_find_or_build_dependency`` behaves similarly except that it will
 build the dependency if it is not found.  Consequentially in addition to the

@@ -14,14 +14,14 @@ Standard CMake Variables
 These are variables that are defined by CMake itself and therefore should be
 honored by all projects using CMake regardless of whether or not they used CPP.
 Note that the inopportune word there is **should**; you'll find a plethora of
-counterexamples...
+counterexamples (said counterexamples are bugs and should be reported).
 
 CMAKE_XXX_COMPILER
 ^^^^^^^^^^^^^^^^^^
 
 Here ``XXX`` can be ``CXX``, ``C``, or ``Fortran``.  This variable can be used
 to specify the compiler for language ``XXX``.  It is strongly recommended that
-you use full paths otherwise weirdness can occur if the environment changes.
+you use full paths otherwise weirdness can occur.
 
 CMAKE_XXX_FLAGS
 ^^^^^^^^^^^^^^^
@@ -33,7 +33,8 @@ CMAKE_TOOLCHAIN_FILE
 ^^^^^^^^^^^^^^^^^^^^
 
 Used to point to the toolchain file.  CPP will automatically forward the
-toolchain file to dependencies.
+toolchain file to dependencies.  See :ref:`toolchains-label` for more
+information on writing a toolchain file.
 
 CMAKE_INSTALL_PREFIX
 ^^^^^^^^^^^^^^^^^^^^
@@ -51,7 +52,9 @@ compiling a project that relies on CPP (unless you install CPP system-wide).
 BUILD_SHARED_LIBRARIES
 ^^^^^^^^^^^^^^^^^^^^^^
 
-This can be used to control whether or not libraries are shared or static.
+This can be used to control whether or not the resulting libraries will be
+shared or static.  Note that this is only honored if package maintainers do not
+force a library to be static/shared.
 
 XXX_ROOT
 ^^^^^^^^
@@ -70,4 +73,13 @@ CPP_GITHUB_TOKEN
 
 Used to authenticate the user for a private GitHub repository.  The value of
 this variable should be set to the token.  The token needs to be generated to
-minimally have read access to the repository.
+minimally have read access to the repository.  See
+`here <https://help.github.com/articles/creating-a-personal-access-token-for-
+the-command-line/>`_ for more information on generating tokens.
+
+CPP_INSTALL_CACHE
+^^^^^^^^^^^^^^^^^
+
+This variable controls where dependency and CPP files should be installed. It
+defaults to ``<build_dir>/cpp_cache``, where ``build_dir`` is the path specified
+for the build directory when the package was configured.

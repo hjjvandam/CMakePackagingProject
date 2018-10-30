@@ -95,9 +95,11 @@ kwargs.  Here's some tips/conventions for using kwargs in CMake:
   * Facilitates forwarding kwargs to subfunctions when subfunction takes
     different keywords.
 
-* Be careful forwarding kwargs to functions that have keywords taking multiple
-  values.  Unrecognized keywords can be taken as additional values for the
-  multiple value keyword.
+* Be careful with keywords accepting multiple values, they can pickup kwargs
+  meant for forwarding.
+
+  * If your function has a kwarg that accepts multiple values you need to look
+    for all kwargs that your subfunctions will use.
 
 
 Kwargs work best if functions accepting them use the same keywords for the same
