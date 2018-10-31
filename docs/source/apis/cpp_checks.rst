@@ -32,14 +32,14 @@ is still defined.
 Example Usage:
 ^^^^^^^^^^^^^^
 
-    .. code-block:: cmake
+.. code-block:: cmake
 
-        _cpp_is_defined(is_defined NOT_A_VARIABLE)
-        if(is_defined)
-            message("NOT_A_VARIABLE is defined")
-        else()
-            message("NOT_A_VARIABLE is not defined")
-        endif()
+   _cpp_is_defined(is_defined NOT_A_VARIABLE)
+   if(is_defined)
+        message("NOT_A_VARIABLE is defined")
+   else()
+        message("NOT_A_VARIABLE is not defined")
+   endif()
 
 .. _is_empty-label:
 
@@ -64,7 +64,7 @@ defining the variable, or not initializing the variable.
 Example Usage:
 ^^^^^^^^^^^^^^
 
-    .. code-block:: cmake
+.. code-block:: cmake
 
         set(A_VARIABLE "")
         _cpp_is_empty(is_empty A_VARIABLE)
@@ -90,9 +90,38 @@ determining whether or not a substring is contained within a string.
 Example Usage:
 ^^^^^^^^^^^^^^
 
-    .. code-block:: cmake
+.. code-block:: cmake
 
-        _cpp_contains(is_contained "Hello" "Hello World")
-        if(is_contained)
-            #Do stuff knowing "Hello" is in the string.
-        endif()
+   _cpp_contains(is_contained "Hello" "Hello World")
+   if(is_contained)
+        #Do stuff knowing "Hello" is in the string.
+   endif()
+
+.. _cpp_xor-label:
+
+_cpp_xor
+--------
+
+.. function:: _cpp_xor(<return> [<var1> [<var2> [...]]])
+
+   The xor function implements an exclusively or check on a series of
+   identifiers.  In other words, this function will check to see if one, and
+   only one, of the variables provided to it is true.  If more than one is
+   true, or all of them are false this function returns false.  This function
+   does not tell you which variable is true because in practice this function is
+   used to make sure the user didn't specify conflicting options.
+
+   :param return: The identifier to contain the output result.
+   :param var: The identifiers to check for the xor condition.
+
+Example Usage:
+^^^^^^^^^^^^^^
+
+.. code-block:: cmake
+
+   set(a_false_variable FALSE)
+   set(a_true_variable TRUE)
+   _cpp_xor(only_1_true a_false_variable a_true_variable)
+   if(only_1_true)
+        #Do stuff knowing that only one of the variables is set to true
+   endif()
